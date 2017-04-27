@@ -3,8 +3,9 @@
 namespace Acme\ExampleBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 
-final class AcmeExampleBundle extends Bundle
+final class AcmeExamplePlugin extends Bundle
 {
-
+    use SyliusPluginTrait;
 }
