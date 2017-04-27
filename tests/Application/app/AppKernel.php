@@ -15,8 +15,7 @@ final class AppKernel extends Kernel
             new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
 
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(), // Required by SyliusApiBundle
-            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
-
+            new \Sylius\Bundle\AdminApiBundle\SyliusAdminApiBundle(),
             new \Acme\ExampleBundle\AcmeExampleBundle(),
         ]);
     }
