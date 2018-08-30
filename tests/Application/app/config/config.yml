@@ -48,6 +48,10 @@ doctrine:
         path: "%kernel.project_dir%/var/db.sql"
         charset: UTF8
 
+doctrine_migrations:
+    dir_name: "%kernel.project_dir%/../../../migrations"
+    namespace: "Sylius\\Migrations"
+
 fos_rest:
     exception: ~
     view:

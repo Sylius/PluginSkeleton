@@ -33,7 +33,8 @@ install:
 
 before_script:
     - (cd tests/Application && bin/console doctrine:database:create --env=test -vvv)
-    - (cd tests/Application && bin/console doctrine:schema:create --env=test -vvv)
+    - cp vendor/sylius/sylius/app/migrations/* ./migrations
+    - (cd tests/Application && bin/console doctrine:migrations:migrate --no-interaction --env=test -vvv)
     - (cd tests/Application && bin/console assets:install web --env=test -vvv)
     - (cd tests/Application && bin/console cache:warmup --env=test -vvv)
     - (cd tests/Application && yarn build)
