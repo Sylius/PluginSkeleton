@@ -70,3 +70,7 @@ liip_imagine:
             web_path:
                 web_root: "%kernel.project_dir%/web"
                 cache_prefix: "media/cache"
+
+sylius_admin:
+    notifications:
+        enabled: false
