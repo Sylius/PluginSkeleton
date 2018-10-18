@@ -1,6 +1,3 @@
-/bin/*
-!/bin/.gitignore
-
 /vendor/
 /node_modules/
 /composer.lock
