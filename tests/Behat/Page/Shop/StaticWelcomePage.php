@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Acme\SyliusExamplePlugin\Behat\Page\Shop;
 
-use Sylius\Behat\Page\SymfonyPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class StaticWelcomePage extends SymfonyPage implements WelcomePageInterface
 {
