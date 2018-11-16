@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Acme\SyliusExamplePlugin\Behat\Page\Shop;
 
-use Sylius\Behat\Page\PageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface WelcomePageInterface extends PageInterface
 {

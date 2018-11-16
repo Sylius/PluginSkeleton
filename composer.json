@@ -34,7 +34,8 @@
         "symfony/dotenv": "^3.4|^4.1",
         "symfony/intl": "^3.4|^4.1",
         "symfony/web-profiler-bundle": "^3.4|^4.1",
-        "symfony/web-server-bundle": "^3.4|^4.1"
+        "symfony/web-server-bundle": "^3.4|^4.1",
+        "friends-of-behat/page-object-extension": "^0.2.1"
     },
     "prefer-stable": true,
     "autoload": {
