@@ -30,7 +30,12 @@ before_install:
     - set -a && source tests/Application/.env.test && set +a
 
 install:
-    - composer require "symfony/symfony:${SYMFONY_VERSION}" --no-interaction --no-update
+    - composer require "symfony/browser-kit:${SYMFONY_VERSION}" --no-interaction --no-update
+    - composer require "symfony/debug-bundle:${SYMFONY_VERSION}" --no-interaction --no-update
+    - composer require "symfony/dotenv:${SYMFONY_VERSION}" --no-interaction --no-update
+    - composer require "symfony/intl:${SYMFONY_VERSION}" --no-interaction --no-update
+    - composer require "symfony/web-profiler-bundle:${SYMFONY_VERSION}" --no-interaction --no-update
+    - composer require "symfony/web-server-bundle:${SYMFONY_VERSION}" --no-interaction --no-update
     - composer install --no-interaction --prefer-dist
     - (cd tests/Application && yarn install)
 
