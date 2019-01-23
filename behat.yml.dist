@@ -36,11 +36,9 @@ default:
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/Application/config/bootstrap.php
             kernel:
-                path: tests/Application/Kernel.php
                 class: Tests\Acme\SyliusExamplePlugin\Application\Kernel
-                environment: test
-                debug: false
 
         FriendsOfBehat\VariadicExtension: ~
 
