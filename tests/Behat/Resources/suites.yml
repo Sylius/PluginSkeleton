@@ -3,7 +3,7 @@
 default:
     suites:
         greeting_customer:
-            contexts_services:
+            contexts:
                 - acme_sylius_example.context.ui.shop.welcome
 
             filters:
