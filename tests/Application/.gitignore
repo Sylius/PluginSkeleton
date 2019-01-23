@@ -1,8 +1,4 @@
-/var/*
-!/var/.gitignore
-
 /public/assets
-/public/bundles
 /public/css
 /public/js
 /public/media/*
@@ -10,11 +6,17 @@
 /public/media/image/*
 !/public/media/image/.gitignore
 
-/vendor
 /node_modules
 
-/.env
-/.env.prod
-/.env.staging
-/.env.test
-/.env.test_cached
+###> symfony/framework-bundle ###
+/.env.*.local
+/.env.local
+/.env.local.php
+/public/bundles
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
