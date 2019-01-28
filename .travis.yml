@@ -6,6 +6,7 @@ sudo: false
 
 php:
     - 7.2
+    - 7.3
 
 cache:
     yarn: true
@@ -18,9 +19,6 @@ env:
         - APP_ENV=test
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
-    matrix:
-        - SYMFONY_VERSION="3.4.*"
-        - SYMFONY_VERSION="4.2.*"
 
 before_install:
     - phpenv config-rm xdebug.ini
@@ -29,11 +27,6 @@ before_install:
     - mkdir -p tests/Application/web/media/image
 
 install:
-    - composer require "symfony/browser-kit:${SYMFONY_VERSION}" --no-interaction --no-update
-    - composer require "symfony/debug-bundle:${SYMFONY_VERSION}" --no-interaction --no-update
-    - composer require "symfony/intl:${SYMFONY_VERSION}" --no-interaction --no-update
-    - composer require "symfony/web-profiler-bundle:${SYMFONY_VERSION}" --no-interaction --no-update
-    - composer require "symfony/web-server-bundle:${SYMFONY_VERSION}" --no-interaction --no-update
     - composer install --no-interaction --prefer-dist
     - (cd tests/Application && yarn install)
 
