@@ -53,3 +53,32 @@ If you're using Behat and want to be up-to-date with our configuration
 * Make your Behat services public by default with `<defaults public="true" />`
 * Change `contexts_services ` in your suite definitions to `contexts`
 * Take a look at [SymfonyExtension UPGRADE guide](https://github.com/FriendsOfBehat/SymfonyExtension/blob/master/UPGRADE-2.0.md) if you have any more problems
+
+# UPGRADE FROM `v1.2.X` TO `v1.4.0`
+
+Firstly, check out the [PluginSkeleton 1.3 upgrade guide](https://github.com/Sylius/PluginSkeleton/blob/1.4/UPGRADE-1.3.md) to update Sylius version step by step.
+To upgrade to Sylius 1.4 follow instructions from [the previous section](https://github.com/Sylius/PluginSkeleton/blob/1.4/UPGRADE-1.4.md#upgrade-from-v13x-to-v140) with following changes:
+
+### Doctrine migrations
+
+* Change namespaces of copied migrations to `Sylius\Migrations`
+
+### Dotenv
+
+* These changes are not required, but can be done as well, if you've changed application directory structure in `1.2.x` to `1.3` update
+
+### Behat
+
+* Add `\FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle()` to your bundles lists in `tests/Application/AppKernel.php` (preferably only in `test` environment)
+* Import Sylius Behat services in `tests/Application/config/config_test.yml` and your own Behat services as well:
+    ```yaml
+    imports:
+        - { resource: "../../../../vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml" }
+    ```
+* Specify test application's kernel path in `behat.yml`:
+    ```yaml
+     FriendsOfBehat\SymfonyExtension:
+        kernel:
+          class: AppKernel
+          path: tests/Application/app/AppKernel.php
+    ```
