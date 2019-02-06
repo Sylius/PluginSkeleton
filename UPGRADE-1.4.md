@@ -8,12 +8,10 @@ First step is upgrading Sylius with composer
 
 #### Migrations
 
-If you use migrations in your plugin's test application, take a look at following changes:
+If you provide migrations with your plugin, take a look at following changes:
 
 * Change base `AbstractMigration` namespace to `Doctrine\Migrations\AbstractMigration`
 * Add `: void` return types to both `up` and `down` functions
-* Copy [this](https://github.com/Sylius/Sylius-Standard/blob/1.4/src/Migrations/Version20190109095211.php) and [this](https://github.com/Sylius/Sylius-Standard/blob/1.4/src/Migrations/Version20190109160409.php) migration to your migrations folder or run `(cd tests/Application && bin/console doctrine:migrations:diff)` to generate new migration with changes from **Sylius**
-* Apply new migrations with `(cd tests/Application && bin/console doctrine:migrations:migrate)`
 
 #### Schema update
 
