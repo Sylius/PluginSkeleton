@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by pamil at 2019-02-15T13:35:21Z
+
+@loevgaard could you add `tests/Application/public/media/image/.gitignore` file and remove that line in Travis? It would make it passing also when run manually, not only on Travis CI.
+
+---------------------------------------------------------------------------
+
+by loevgaard at 2019-02-15T13:53:22Z
+
+Okay, you already did that. Apparently my test plugin wasn't updated and then I saw this line in travis and figured it must be a bug. Now I just removed the line from travis :)
+
+---------------------------------------------------------------------------
+
+by pamil at 2019-02-15T14:51:23Z
+
+Thank you, Joachim! :tada:
