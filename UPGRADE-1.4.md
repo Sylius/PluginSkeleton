@@ -52,6 +52,10 @@ If you're using Behat and want to be up-to-date with our configuration
 * Change `contexts_services ` in your suite definitions to `contexts`
 * Take a look at [SymfonyExtension UPGRADE guide](https://github.com/FriendsOfBehat/SymfonyExtension/blob/master/UPGRADE-2.0.md) if you have any more problems
 
+### Phpstan
+
+* Fix the container XML path parameter in the `phpstan.neon` file as done [here](https://github.com/Sylius/PluginSkeleton/commit/37fa614dbbcf8eb31b89eaf202b4bd4d89a5c7b3)
+
 # UPGRADE FROM `v1.2.X` TO `v1.4.0`
 
 Firstly, check out the [PluginSkeleton 1.3 upgrade guide](https://github.com/Sylius/PluginSkeleton/blob/1.4/UPGRADE-1.3.md) to update Sylius version step by step.
