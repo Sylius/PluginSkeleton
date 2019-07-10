@@ -24,6 +24,12 @@ If you don't use migrations, just run `(cd tests/Application && bin/console doct
 
 Don't forget to clear the cache (`tests/Application/bin/console cache:clear`) to be 100% everything is loaded properly.
 
+### Test application kernel
+
+The kernel of the test application needs to be replaced with this [file](https://github.com/Sylius/PluginSkeleton/blob/1.4/tests/Application/Kernel.php).
+The location of the kernel is: `tests/Application/Kernel.php` (replace the content with the content of the file above).
+The container cleanup method is removed in the new version and keeping it will cause problems with for example the `TagAwareAdapter` which will call `commit()` on its pool from its destructor. If its pool is `TraceableAdapter` with pool `ArrayAdapter`, then the pool property of `TraceableAdapter` will be nullified before the destructor is executed and cause an error.
+
 ---
 
 ### Behat
