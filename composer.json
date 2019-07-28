@@ -32,7 +32,9 @@
         "symfony/dotenv": "^4.2",
         "symfony/intl": "^3.4|^4.1",
         "symfony/web-profiler-bundle": "^3.4|^4.1",
-        "symfony/web-server-bundle": "^3.4|^4.1"
+        "symfony/web-server-bundle": "^3.4|^4.1",
+        "hwi/oauth-bundle": "^0.6.3"
+
     },
     "conflict": {
         "symfony/symfony": "4.1.8",
