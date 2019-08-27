@@ -37,12 +37,14 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "Acme\\SyliusExamplePlugin\\": "src/"
         }
     },
     "autoload-dev": {
-        "classmap": ["tests/Application/Kernel.php"]
+        "classmap": ["tests/Application/Kernel.php"],
+        "psr-4": {
+            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {
