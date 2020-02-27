@@ -12,7 +12,10 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 final class AcmeSyliusExampleExtension extends Extension
 {
     /**
-     * {@inheritdoc}
+     * @param array<mixed> $config
+     * @param ContainerBuilder $container
+     *
+     * @throws \InvalidArgumentException When provided tag is not defined in this extension
      */
     public function load(array $config, ContainerBuilder $container): void
     {
