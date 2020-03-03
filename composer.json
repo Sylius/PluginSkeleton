@@ -5,9 +5,9 @@
     "description": "Acme example plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
-        "sylius/sylius": "dev-master"
+        "sylius/sylius": "^1.7"
     },
     "require-dev": {
         "behat/behat": "^3.4",
