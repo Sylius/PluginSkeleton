@@ -52,5 +52,13 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php bin/create_node_symlink.php"
+        ],
+        "post-update-cmd": [
+            "php bin/create_node_symlink.php"
+        ]
     }
 }
