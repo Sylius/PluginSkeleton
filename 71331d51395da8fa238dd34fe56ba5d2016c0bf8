@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+
+by 4c0n at 2020-04-14T08:53:32Z
+
+@pamil Hi Kamil,
+Would you happen to know what is wrong with the builds?
+```
+In CheckExceptionOnInvalidReferenceBehaviorPass.php line 86:
+
+  [Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException]
+  The service "sylius.behat.context.api.admin.managing_administrators" has a
+  dependency on a non-existent service "api_platform.iri_converter".
+```
+Can't imagine this being related to my change in `phpstan.neon`.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-14T14:53:10Z
+
+It is a generic problem of the current PluginSkeleton, due to the recent introduction of API Platform to the main repository.
+
+Master build is still failing because of it: https://travis-ci.org/github/Sylius/PluginSkeleton/builds/674856458
+
+We will take a look into it in the nearest days, I suppose.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-05-14T12:12:20Z
+
+Thank you, Youri! :1st_place_medal:
