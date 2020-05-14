@@ -4,6 +4,7 @@ includes:
 
 parameters:
     reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
 
     excludes_analyse:
         # Makes PHPStan crash
