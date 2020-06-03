@@ -4,36 +4,21 @@ declare(strict_types=1);
 
 namespace Acme\SyliusExamplePlugin\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-final class GreetingController extends Controller
+final class GreetingController extends AbstractController
 {
-    /**
-     * @param string|null $name
-     *
-     * @return Response
-     */
     public function staticallyGreetAction(?string $name): Response
     {
         return $this->render('@AcmeSyliusExamplePlugin/static_greeting.html.twig', ['greeting' => $this->getGreeting($name)]);
     }
 
-    /**
-     * @param string|null $name
-     *
-     * @return Response
-     */
     public function dynamicallyGreetAction(?string $name): Response
     {
         return $this->render('@AcmeSyliusExamplePlugin/dynamic_greeting.html.twig', ['greeting' => $this->getGreeting($name)]);
     }
 
-    /**
-     * @param string|null $name
-     *
-     * @return string
-     */
     private function getGreeting(?string $name): string
     {
         switch ($name) {
