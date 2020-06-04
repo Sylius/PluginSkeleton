@@ -1,9 +1,23 @@
 language: php
 
-dist: trusty
+os: linux
+
+dist: bionic
 
 php:
     - '7.3'
+    - '7.4'
+
+services:
+    - mysql
+
+addons:
+    apt:
+        sources:
+            - google-chrome
+        packages:
+            - google-chrome-stable
+    chrome: stable
 
 cache:
     yarn: true
@@ -33,38 +47,25 @@ before_script:
     - (cd tests/Application && bin/console cache:warmup -vvv)
     - (cd tests/Application && yarn build)
 
-    # Configure display
-    - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
-    - export DISPLAY=:99
-
-    # Download and configure ChromeDriver
+    # Downloading Symfony CLI
     - |
-        if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 2.34)" = "0" ]; then
-            curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip
-            unzip chromedriver.zip
-            chmod +x chromedriver
-            mv chromedriver $SYLIUS_CACHE_DIR
+        if [ ! -f $SYLIUS_CACHE_DIR/symfony ]; then
+            wget https://get.symfony.com/cli/installer -O - | bash
+            mv ~/.symfony/bin/symfony $SYLIUS_CACHE_DIR
         fi
+        php -v | head -n 1 | awk '{ print $2 }' > .php-version
 
-    # Run ChromeDriver
-    - $SYLIUS_CACHE_DIR/chromedriver > /dev/null 2>&1 &
-
-    # Download and configure Selenium
-    - |
-        if [ ! -f $SYLIUS_CACHE_DIR/selenium.jar ] || [ "$(java -jar $SYLIUS_CACHE_DIR/selenium.jar --version | grep -c 3.4.0)" = "0" ]; then
-            curl http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar > selenium.jar
-            mv selenium.jar $SYLIUS_CACHE_DIR
-        fi
-
-    # Run Selenium
-    - java -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver -jar $SYLIUS_CACHE_DIR/selenium.jar > /dev/null 2>&1 &
+    # Run Chrome Headless
+    - google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
 
     # Run webserver
-    - (cd tests/Application && bin/console server:run 127.0.0.1:8080 --quiet > /dev/null 2>&1 &)
+    - (cd tests/Application && $SYLIUS_CACHE_DIR/symfony server:start --port=8080 --dir=public --daemon)
 
 script:
     - composer validate
+
     - vendor/bin/phpstan analyse -c phpstan.neon -l max src/
+    - vendor/bin/psalm
 
     - vendor/bin/phpunit
     - vendor/bin/phpspec run
