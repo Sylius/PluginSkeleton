@@ -1,0 +1,70 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2020-06-03T12:58:35Z
+
+@ideaconnect did you try PHP's built-in, cross-platform functions: [symlink](https://www.php.net/manual/en/function.symlink.php) and [link](https://www.php.net/manual/en/function.link.php)
+Also, maybe first check if the link doesn't exist.
+
+---------------------------------------------------------------------------
+
+by ideaconnect at 2020-06-03T20:58:02Z
+
+I have rebased on `master` yet from what I can see there is an error with services when running in `test` environment and is related to the latest update in Sylius itself. Fixed by update of the bundles config:
+```
+ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
+```
+
+Later an error:
+```
+Symfony\Component\Routing\Exception\RouteNotFoundException: Unable to generate a URL for the named route "api_doc" as such route does not exist. in vendor/symfony/routing/Generator/CompiledUrlGenerator.php:50
+```
+started to occur and it seems that the reason was lack of configuration related to api platform from latest Sylius/Sylius.
+
+I have added minimum of compatibility updates for 1.8-dev for the existing tests to pass, yet probably you have your own procedure.
+
+@pamil @vvasiloi
+
+On Windows:
+* `link` does not support folders, gives permission denied even with admin privileges
+* `symlink` to folders works only with admin privileges and requires target path to be already present on Windows - in: `./win32/ioutil.c` of PHP's code:
+```
+        if ((attr = GetFileAttributesW(target)) == INVALID_FILE_ATTRIBUTES) {
+                SET_ERRNO_FROM_WIN32_CODE(GetLastError());
+                return -1;
+        }
+```
+
+Technically the problem of path being present is not our case here as the empty `node_modules` folder already exists in `Application` yet changes made now are prepared for a scenario when such folder does not yet exist and is created after `yarn` execution.
+
+Functions respectively rely on:
+`php_win32_ioutil_symlink` and `php_win32_ioutil_symlink` calls (as defined in `./Zend/zend_virtual_cwd.h` of the php src)
+which rely on:
+`php_win32_ioutil_symlink_w` and `php_win32_ioutil_link_w`
+which translate into:
+* `php_win32_ioutil_symlink_w` => `CreateSymbolicLinkW(link, target, (attr & FILE_ATTRIBUTE_DIRECTORY ? 1 : 0));`
+* `php_win32_ioutil_link_w` => `CreateHardLinkW(link, target, NULL);`
+
+As microsoft says in their docs:
+https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createhardlinkw
+`CreateHardLinkW` works only with files.
+
+and `CreateSymbolicLinkW` can be used only without admin privileges if another flag is set (not set in the code of php) and system is in the `developer mode`.
+https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createsymboliclinkw
+
+Therefore I suggest to always run the function `symlink` yet on windows, if it fails fallback to a Junction.
+
+Since Junctions support already relative paths i guess there is no need for my additional approach of creating Symbolic Links (that is a different term on Windows).
+
+In case a file already exists and is a link or directory I do not attempt to re-create it.
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-06-10T12:06:37Z
+
+@ideaconnect love the attention to details in your comment! I'll merge it to the master branch and then port the symlink changes to the 1.7 branch. Thanks a lot 🙏
+
+---------------------------------------------------------------------------
+
+by pamil at 2020-06-10T12:10:38Z
+
+Thanks, IDCT! :tada:
