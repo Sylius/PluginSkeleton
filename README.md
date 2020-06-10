@@ -22,10 +22,10 @@ there you will find the <a href="https://docs.sylius.com/en/latest/plugin-develo
     ```bash
     $ (cd tests/Application && yarn install)
     $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && bin/console assets:install public -e test)
+    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
     
-    $ (cd tests/Application && bin/console doctrine:database:create -e test)
-    $ (cd tests/Application && bin/console doctrine:schema:create -e test)
+    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
+    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
     ```
 
 To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
@@ -37,57 +37,76 @@ To be able to setup a plugin's database, remember to configure you database cred
   - PHPUnit
 
     ```bash
-    $ vendor/bin/phpunit
+    vendor/bin/phpunit
     ```
 
   - PHPSpec
 
     ```bash
-    $ vendor/bin/phpspec run
+    vendor/bin/phpspec run
     ```
 
   - Behat (non-JS scenarios)
 
     ```bash
-    $ vendor/bin/behat --tags="~@javascript"
+    vendor/bin/behat --strict --tags="~@javascript"
     ```
 
   - Behat (JS scenarios)
  
-    1. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)
+    1. [Install Symfony CLI command](https://symfony.com/download).
+ 
+    2. Start Headless Chrome:
     
-    2. Download [Selenium Standalone Server](https://www.seleniumhq.org/download/).
+      ```bash
+      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
+      ```
     
-    2. Run Selenium server with previously downloaded Chromedriver:
+    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
     
-        ```bash
-        $ java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar
-        ```
-        
-    3. Run test application's webserver on `localhost:8080`:
-    
-        ```bash
-        $ (cd tests/Application && bin/console server:run localhost:8080 -d public -e test)
-        ```
+      ```bash
+      symfony server:ca:install
+      APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
+      ```
     
     4. Run Behat:
     
-        ```bash
-        $ vendor/bin/behat --tags="@javascript"
-        ```
+      ```bash
+      vendor/bin/behat --strict --tags="@javascript"
+      ```
+    
+  - Static Analysis
+  
+    - Psalm
+    
+      ```bash
+      vendor/bin/psalm
+      ```
+      
+    - PHPStan
+    
+      ```bash
+      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
+      ```
+
+  - Coding Standard
+  
+    ```bash
+    vendor/bin/ecs check src
+    ```
 
 ### Opening Sylius with your plugin
 
 - Using `test` environment:
 
     ```bash
-    $ (cd tests/Application && bin/console sylius:fixtures:load -e test)
-    $ (cd tests/Application && bin/console server:run -d public -e test)
+    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
+    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
     ```
     
 - Using `dev` environment:
 
     ```bash
-    $ (cd tests/Application && bin/console sylius:fixtures:load -e dev)
-    $ (cd tests/Application && bin/console server:run -d public -e dev)
+    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
+    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
     ```
