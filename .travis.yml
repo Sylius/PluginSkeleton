@@ -47,9 +47,6 @@ before_script:
     - (cd tests/Application && bin/console cache:warmup -vvv)
     - (cd tests/Application && yarn build)
 
-    # Install certificates
-    - $SYLIUS_CACHE_DIR/symfony server:ca:install
-
     # Download Symfony CLI
     - |
         if [ ! -f $SYLIUS_CACHE_DIR/symfony ]; then
@@ -58,6 +55,9 @@ before_script:
         fi
         php -v | head -n 1 | awk '{ print $2 }' > .php-version
 
+    # Install certificates
+    - $SYLIUS_CACHE_DIR/symfony server:ca:install
+    
     # Run Chrome Headless
     - google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
 
