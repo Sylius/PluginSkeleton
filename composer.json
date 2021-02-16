@@ -24,7 +24,7 @@
         "lakion/mink-debug-extension": "^2.0.0",
         "phpspec/phpspec": "^7.0",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "0.12.74",
+        "phpstan/phpstan": "0.12.76",
         "phpstan/phpstan-doctrine": "0.12.31",
         "phpstan/phpstan-strict-rules": "^0.12.0",
         "phpstan/phpstan-webmozart-assert": "0.12.12",
