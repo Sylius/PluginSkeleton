@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "sylius/sylius": "~1.8.0 || ~1.9.0@beta"
+        "sylius/sylius": "~1.8.0 || ~1.9.0"
     },
     "conflict": {
         "api-platform/core": "^2.6"
