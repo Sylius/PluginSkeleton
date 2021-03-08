@@ -109,6 +109,11 @@ jobs:
                 run: composer require "sylius/sylius:${{ matrix.sylius }}" --no-update --no-scripts --no-interaction
 
             -
+                name: Fix FOSOAuthServerBundle on Sylius 1.9
+                if: matrix.sylius == '~1.9.0'
+                run: composer require "friendsofsymfony/oauth-server-bundle:>2.0.0-alpha.0 ^2.0@dev" --dev --no-update --no-scripts --no-interaction
+
+            -
                 name: Install PHP dependencies
                 run: composer install --no-interaction
 
