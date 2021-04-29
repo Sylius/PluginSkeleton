@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
-        "sylius/sylius": "~1.10.0@dev"
+        "sylius/sylius": "~1.9.0 || ~1.10.0@dev"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -27,8 +27,8 @@
         "lakion/mink-debug-extension": "^2.0.0",
         "phpspec/phpspec": "^7.0",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "0.12.74",
-        "phpstan/phpstan-doctrine": "0.12.31",
+        "phpstan/phpstan": "0.12.85",
+        "phpstan/phpstan-doctrine": "0.12.33",
         "phpstan/phpstan-strict-rules": "^0.12.0",
         "phpstan/phpstan-webmozart-assert": "0.12.12",
         "phpunit/phpunit": "^9.5",
@@ -39,7 +39,7 @@
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/intl": "^4.4 || ^5.2",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
-        "vimeo/psalm": "4.4.1"
+        "vimeo/psalm": "4.6.4"
     },
     "config": {
         "sort-packages": true
