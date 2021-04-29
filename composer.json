@@ -1,12 +1,14 @@
 {
     "name": "sylius/plugin-skeleton",
     "type": "sylius-plugin",
-    "keywords": ["sylius", "sylius-plugin"],
     "description": "Acme example plugin for Sylius.",
+    "keywords": [
+        "sylius",
+        "sylius-plugin"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3",
-
         "sylius/sylius": "^1.8"
     },
     "require-dev": {
@@ -32,12 +34,20 @@
         "sensiolabs/security-checker": "^6.0",
         "sylius-labs/coding-standard": "^3.1",
         "symfony/browser-kit": "^4.4",
-        "symfony/debug-bundle": "^4.4|^5.0",
-        "symfony/dotenv": "^4.4|^5.0",
-        "symfony/intl": "^4.4|^5.0",
-        "symfony/web-profiler-bundle": "^4.4|^5.0",
-        "symfony/web-server-bundle": "^4.4|^5.0",
+        "symfony/debug-bundle": "^4.4 || ^5.0",
+        "symfony/dotenv": "^4.4 || ^5.0",
+        "symfony/intl": "^4.4 || ^5.0",
+        "symfony/web-profiler-bundle": "^4.4 || ^5.0",
+        "symfony/web-server-bundle": "^4.4 || ^5.0",
         "vimeo/psalm": "4.4.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.8-dev"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -46,15 +56,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": ["tests/Application/Kernel.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.8-dev"
-        }
-    },
-    "config": {
-        "sort-packages": true
+        "classmap": [
+            "tests/Application/Kernel.php"
+        ]
     },
     "scripts": {
         "post-install-cmd": [
