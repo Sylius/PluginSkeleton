@@ -12,6 +12,9 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class AcmeSyliusExampleExtension extends Extension
 {
+    /**
+     * @psalm-suppress UnusedVariable
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
