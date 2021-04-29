@@ -8,11 +8,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3",
-        "sylius/sylius": "~1.8.0 || ~1.9.0@beta"
-    },
-    "conflict": {
-        "api-platform/core": "^2.6"
+        "php": "^7.4 || ^8.0",
+        "sylius/sylius": "~1.10.0@dev"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
