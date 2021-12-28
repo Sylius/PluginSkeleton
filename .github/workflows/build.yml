@@ -22,15 +22,10 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "7.4"]
-                symfony: ["^4.4", "^5.2"]
-                sylius: ["~1.9.0", "~1.10.0@alpha"]
+                symfony: ["^4.4", "5.2.*", "5.3.*", "5.4.*"]
+                sylius: ["^1.10"]
                 node: ["10.x"]
                 mysql: ["8.0"]
-
-                exclude:
-                    -
-                        php: "8.0"
-                        sylius: "~1.9.0"
 
 
         env:
