@@ -30,7 +30,7 @@
         "phpstan/phpstan": "0.12.99",
         "phpstan/phpstan-doctrine": "0.12.33",
         "phpstan/phpstan-strict-rules": "^0.12.0",
-        "phpstan/phpstan-webmozart-assert": "0.12.12",
+        "phpstan/phpstan-webmozart-assert": "0.12.16",
         "phpunit/phpunit": "^9.5",
         "sensiolabs/security-checker": "^6.0",
         "sylius-labs/coding-standard": "^4.0",
