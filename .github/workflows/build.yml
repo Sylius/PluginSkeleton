@@ -24,7 +24,7 @@ jobs:
                 php: ["8.0"]
                 symfony: ["5.4.*"]
                 sylius: ["^1.11"]
-                node: ["10.x"]
+                node: ["14.x"]
                 mysql: ["8.0"]
 
         env:
