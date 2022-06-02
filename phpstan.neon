@@ -1,6 +1,10 @@
 parameters:
+    level: max
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
+    paths:
+        - src
+        - tests/Behat
 
     excludes_analyse:
         # Makes PHPStan crash
