@@ -15,6 +15,8 @@ there you will find the <a href="https://docs.sylius.com/en/latest/plugin-develo
 
 ## Quickstart Installation
 
+### Traditional
+
 1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
 
 2. From the plugin skeleton root directory, run the following commands:
@@ -28,7 +30,15 @@ there you will find the <a href="https://docs.sylius.com/en/latest/plugin-develo
     $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
     ```
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+To be able to set up a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+
+### Docker
+
+1. Execute `docker compose up -d`
+
+2. Initialize plugin `docker compose exec app make init`
+
+3. See your browser `open localhost`
 
 ## Usage
 
