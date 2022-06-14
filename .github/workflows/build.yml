@@ -41,7 +41,7 @@ jobs:
                 with:
                     php-version: "${{ matrix.php }}"
                     extensions: intl
-                    tools: symfony
+                    tools: flex,symfony
                     coverage: none
 
             -
@@ -92,12 +92,10 @@ jobs:
                         ${{ runner.os }}-php-${{ matrix.php }}-composer-
 
             -
-                name: Restrict Symfony version
-                if: matrix.symfony != ''
+                name: Configure global composer
                 run: |
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
-                    composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
                 name: Restrict Sylius version
@@ -107,6 +105,8 @@ jobs:
             -
                 name: Install PHP dependencies
                 run: composer install --no-interaction
+                env:
+                    SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
             -
                 name: Get Yarn cache directory
