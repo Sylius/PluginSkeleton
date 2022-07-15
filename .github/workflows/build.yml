@@ -23,7 +23,7 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["5.4.*"]
-                sylius: ["^1.11.2"]
+                sylius: ["^1.11.6"]
                 node: ["14.x"]
                 mysql: ["8.0"]
 
@@ -95,7 +95,8 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.2.2"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
