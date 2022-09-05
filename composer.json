@@ -41,7 +41,7 @@
         "symfony/flex": "^2.2.2",
         "symfony/intl": "^5.4",
         "symfony/web-profiler-bundle": "^5.4",
-        "vimeo/psalm": "4.24.0"
+        "vimeo/psalm": "4.27.0"
     },
     "config": {
         "sort-packages": true,
