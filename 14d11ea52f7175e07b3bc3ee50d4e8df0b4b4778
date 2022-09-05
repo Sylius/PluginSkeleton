@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2022-06-15T12:57:30Z
+
+@lchrusciel it works => https://github.com/Sylius/PluginSkeleton/runs/6894864414?check_suite_focus=true#step:15:15
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-09-02T07:06:30Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-09-05T11:46:07Z
+
+Thank you, Michael! :tada:
