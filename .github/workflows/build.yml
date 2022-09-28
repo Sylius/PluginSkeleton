@@ -14,7 +14,7 @@ on:
 
 jobs:
     tests:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         name: "Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
 
@@ -23,9 +23,9 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["5.4.*"]
-                sylius: ["^1.11.6"]
-                node: ["14.x"]
-                mysql: ["8.0"]
+                sylius: ["^1.12.x-dev"]
+                node: ["14.x", "16.x", "18.x"]
+                mysql: ["5.7", "8.0"]
 
         env:
             APP_ENV: test
@@ -136,7 +136,7 @@ jobs:
                 name: Prepare test application assets
                 run: |
                     (cd tests/Application && bin/console assets:install public -vvv)
-                    (cd tests/Application && yarn build)
+                    (cd tests/Application && yarn build:prod)
 
             -
                 name: Prepare test application cache
