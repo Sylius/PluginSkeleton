@@ -60,10 +60,13 @@
     "autoload": {
         "psr-4": {
             "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "Tests\\Acme\\SyliusExamplePlugin\\Behat\\": "tests/Behat/"
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+        },
         "classmap": [
             "tests/Application/Kernel.php"
         ]
