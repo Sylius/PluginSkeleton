@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "sylius/sylius": "^1.12.x-dev",
+        "sylius/sylius": "^1.12",
         "symfony/webpack-encore-bundle": "^1.15"
     },
     "require-dev": {
