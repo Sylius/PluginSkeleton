@@ -102,7 +102,7 @@ To be able to set up a plugin's database, remember to configure you database cre
   - Coding Standard
   
     ```bash
-    vendor/bin/ecs check src
+    vendor/bin/ecs check
     ```
 
 ### Opening Sylius with your plugin
