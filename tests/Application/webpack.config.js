@@ -7,14 +7,14 @@ const uiBundleResources = path.resolve(syliusBundles, 'UiBundle/Resources/privat
 
 // Shop config
 Encore
-    .setOutputPath('public/build/shop/')
-    .setPublicPath('/build/shop')
-    .addEntry('shop-entry', './assets/shop/entry.js')
-    .disableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
-    .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction())
-    .enableSassLoader();
+  .setOutputPath('public/build/shop/')
+  .setPublicPath('/build/shop')
+  .addEntry('shop-entry', '../../vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/entry.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .enableSassLoader();
 
 const shopConfig = Encore.getWebpackConfig();
 
@@ -28,14 +28,14 @@ Encore.reset();
 
 // Admin config
 Encore
-    .setOutputPath('public/build/admin/')
-    .setPublicPath('/build/admin')
-    .addEntry('admin-entry', './assets/admin/entry.js')
-    .disableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
-    .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction())
-    .enableSassLoader();
+  .setOutputPath('public/build/admin/')
+  .setPublicPath('/build/admin')
+  .addEntry('admin-entry', '../../vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/private/entry.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .enableSassLoader();
 
 const adminConfig = Encore.getWebpackConfig();
 
