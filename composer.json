@@ -43,6 +43,9 @@
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
         "vimeo/psalm": "5.9.0"
     },
+    "conflict": {
+        "symfony/framework-bundle": "6.2.8"
+    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
