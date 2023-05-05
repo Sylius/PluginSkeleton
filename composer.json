@@ -41,7 +41,7 @@
         "symfony/flex": "^2.2.2",
         "symfony/intl": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
-        "vimeo/psalm": "5.9.0"
+        "vimeo/psalm": "5.11.0"
     },
     "conflict": {
         "symfony/framework-bundle": "6.2.8"
