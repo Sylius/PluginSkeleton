@@ -1,7 +1,7 @@
 /.docker export-ignore
-/.github export-ignore
 /.editorconfig export-ignore
 /.gitattributes export-ignore
+/.github export-ignore
 /.gitignore export-ignore
 /behat.yml.dist export-ignore
 /bin export-ignore
