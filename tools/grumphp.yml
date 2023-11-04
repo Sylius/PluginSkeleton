@@ -1,0 +1,49 @@
+grumphp:
+    ascii:
+        failed: ~
+        succeeded: ~
+    tasks:
+        git_commit_message:
+            allow_empty_message: false
+            enforce_capitalized_subject: false
+            enforce_no_subject_punctuations: false
+            enforce_no_subject_trailing_period: true
+            enforce_single_lined_subject: true
+            type_scope_conventions: [ ]
+            max_body_width: 80
+            max_subject_width: 80
+            matchers:
+                "Commit message must contain": /^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)\:/
+            case_insensitive: true
+            multiline: false
+            additional_modifiers: ''
+        git_blacklist:
+            keywords:
+                - 'var_dump'
+                - "dump("
+                - 'print_r'
+                - 'die('
+                - 'console\.'
+            triggered_by: [php, twig, js]
+        composer:
+            no_check_all: true
+        phpcpd:
+            directory: ['src']
+        phpcs:
+            standard: "PSR1"
+            warning_severity: 0
+            whitelist_patterns:
+                - 'src'
+        phpcsfixer2:
+            config: 'tools/.php-cs-fixer.php'
+            verbose: true
+            diff: true
+            triggered_by: ['php']
+        phpmd:
+            ruleset: ["tools/.php_md.xml"]
+            exclude: ["tests/*"] 
+        phpmnd:
+            directory: "src" 
+        phpstan: 
+            configuration: "tools/phpstan.neon"
+        yamllint: ~

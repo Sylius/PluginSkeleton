@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Tests\Acme\SyliusExamplePlugin\Application\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
+use Tests\Clictec\Bundle\ExampleBundle\Application\Kernel;
 
 require dirname(__DIR__) . '/config/bootstrap.php';
 

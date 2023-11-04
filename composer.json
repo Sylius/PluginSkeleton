@@ -1,46 +1,35 @@
 {
-    "name": "sylius/plugin-skeleton",
-    "type": "sylius-plugin",
-    "description": "Acme example plugin for Sylius.",
+    "name": "clictec/symfony-bundle-skeleton",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle skeleton for Symfony.",
     "keywords": [
-        "sylius",
-        "sylius-plugin"
+        "symfony-bundle"
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
-        "sylius/sylius": "^1.12",
-        "sylius/mailer-bundle":  "^1.8 || ^2.0@beta",
-        "symfony/webpack-encore-bundle": "^1.15"
+        "php": "^8.1",
+        "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "require-dev": {
-        "behat/behat": "^3.6.1",
-        "behat/mink-selenium2-driver": "^1.4",
-        "dmore/behat-chrome-extension": "^1.3",
-        "dmore/chrome-mink-driver": "^2.7",
-        "friends-of-behat/mink": "^1.8",
-        "friends-of-behat/mink-browserkit-driver": "^1.4",
-        "friends-of-behat/mink-debug-extension": "^2.0.0",
-        "friends-of-behat/mink-extension": "^2.4",
-        "friends-of-behat/page-object-extension": "^0.3",
-        "friends-of-behat/suite-settings-extension": "^1.0",
-        "friends-of-behat/symfony-extension": "^2.1",
-        "friends-of-behat/variadic-extension": "^1.3",
+        "friendsofphp/php-cs-fixer": "^3.37",
+        "phpmd/phpmd": "^2.14",
+        "phpro/grumphp": "^1.16",
         "phpspec/phpspec": "^7.2",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "^1.8.1",
+        "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-doctrine": "1.3.40",
-        "phpstan/phpstan-strict-rules": "^1.3.0",
-        "phpstan/phpstan-webmozart-assert": "^1.2.0",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "phpstan/phpstan-symfony": "^1.3",
+        "phpstan/phpstan-webmozart-assert": "^1.2",
         "phpunit/phpunit": "^9.5",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "sylius-labs/coding-standard": "^4.2",
+        "povils/phpmnd": "^3.2",
+        "sebastian/phpcpd": "^6.0",
+        "squizlabs/php_codesniffer": "^3.7",
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/debug-bundle": "^5.4 || ^6.0",
         "symfony/dotenv": "^5.4 || ^6.0",
         "symfony/flex": "^2.2.2",
         "symfony/intl": "^5.4 || ^6.0",
-        "symfony/web-profiler-bundle": "^5.4 || ^6.0",
         "vimeo/psalm": "5.12.0"
     },
     "conflict": {
@@ -51,7 +40,8 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "phpstan/extension-installer": true,
-            "symfony/flex": true
+            "symfony/flex": true,
+            "phpro/grumphp": true
         }
     },
     "extra": {
@@ -60,12 +50,15 @@
         },
         "symfony": {
             "require": "^5.4 || ^6.0"
+        },
+        "grumphp": {
+            "config-default-path": "tools/grumphp.yml"
         }
     },
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "Clictec\\Bundle\\ExampleBundle\\": "src/",
+            "Tests\\Clictec\\Bundle\\ExampleBundle\\": "tests/"
         }
     },
     "autoload-dev": {
@@ -73,16 +66,18 @@
             "tests/Application/Kernel.php"
         ]
     },
+    "authors": [
+        {
+            "name": "karima El Kabous",
+            "email": "karima.elkabous1@gmail.com"
+        },
+        {
+            "name": "Ayoub Dhaibi",
+            "email": "dhaibi.ayoub@gmail.com"
+        }
+    ],
     "scripts": {
-        "post-install-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-update-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-create-project-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
+        "grumphp": "grumphp run --ansi",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",

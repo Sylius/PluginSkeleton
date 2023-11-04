@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use Tests\Acme\SyliusExamplePlugin\Application\Kernel;
+use Tests\Clictec\Bundle\ExampleBundle\Application\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;

@@ -13,6 +13,18 @@
 /phpunit.xml
 .phpunit.result.cache
 
+/var/
+
 # Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
 /.php-version
 /php.ini
+
+###> friendsofphp/php-cs-fixer ###
+.php-cs-fixer.cache
+tools/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###

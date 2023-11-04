@@ -1,0 +1,16 @@
+parameters:
+    level: max
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    paths:
+        - src
+
+    excludePaths:
+        # Test dependencies
+        - '%currentWorkingDirectory%/tests/Application/app/**.php'
+        - '%currentWorkingDirectory%/tests/Application/src/**.php'
+        - '%currentWorkingDirectory%/tests/Application/Kernel.php'
+        - '%currentWorkingDirectory%/tests/Application/public/index.php'
+        - '%currentWorkingDirectory%/tests/Application/config/bootstrap.php'
+
+    ignoreErrors:

@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Acme\SyliusExamplePlugin\Application;
+namespace Tests\Clictec\Bundle\ExampleBundle\Application;
 
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
-use Sylius\Bundle\CoreBundle\Application\Kernel as SyliusKernel;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -56,7 +55,7 @@ final class Kernel extends BaseKernel
 
     private function isTestEnvironment(): bool
     {
-        return 0 === strpos($this->getEnvironment(), 'test');
+        return str_starts_with($this->getEnvironment(), 'test');
     }
 
     private function loadRoutesConfiguration(RoutingConfigurator $routes, string $confDir): void
@@ -84,12 +83,7 @@ final class Kernel extends BaseKernel
      */
     private function getConfigurationDirectories(): iterable
     {
-        yield $this->getProjectDir() . '/config';
-        $syliusConfigDir = $this->getProjectDir() . '/config/sylius/' . SyliusKernel::MAJOR_VERSION . '.' . SyliusKernel::MINOR_VERSION;
-        if (is_dir($syliusConfigDir)) {
-            yield $syliusConfigDir;
-        }
-        $symfonyConfigDir = $this->getProjectDir() . '/config/symfony/' . BaseKernel::MAJOR_VERSION . '.' . BaseKernel::MINOR_VERSION;
+        $symfonyConfigDir = $this->getProjectDir() . '/tests/Application/config/';
         if (is_dir($symfonyConfigDir)) {
             yield $symfonyConfigDir;
         }
