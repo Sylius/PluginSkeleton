@@ -7,13 +7,7 @@ phpspec:
 phpstan:
 	vendor/bin/phpstan analyse
 
-psalm:
-	vendor/bin/psalm
-
-behat-js:
-	APP_ENV=test vendor/bin/behat --colors --strict --no-interaction -vvv -f progress
-
-install:
+composer:
 	composer install --no-interaction --no-scripts
 
 backend:
@@ -44,10 +38,12 @@ rewrite:
     sed -i '' "s#Acme\\\\SyliusExamplePlugin\\\\AcmeSyliusExamplePlugin::class#$${namePlugin}\\\\$${nameFile}::class#g" tests/Application/config/bundles.php;  \
     sed -i '' "s#Acme\\\\SyliusExamplePlugin#$${namePlugin}#g" phpspec.yml.dist;
 
-init: rewrite install backend frontend
+install: composer backend frontend
 
-ci: init phpstan psalm phpunit phpspec
+ci: install phpstan phpunit phpspec
 
-integration: init phpunit behat
+integration: install phpunit
 
-static: install phpspec phpstan psalm
+static: install phpspec phpstan
+
+init: rewrite install
