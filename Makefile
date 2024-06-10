@@ -19,17 +19,24 @@ frontend:
 	(cd tests/Application && GULP_ENV=prod yarn build)
 
 rewrite:
-	@read -p "Enter the name of your plugin: " plugin_name; \
-    read -p "Enter the description of your plugin: " description; \
-    converted_name=$$(echo $$plugin_name | sed 's/\([A-Z]\)/-\1/g' | tr '[:upper:]' '[:lower:]'); \
-    converted_name="acseo/sylius-$${converted_name#-}-plugin"; \
+	@while [ -z "$$plugin_name" ]; do \
+	    read -p "Enter the name of your plugin: " plugin_name; \
+	done; \
+	while [ -z "$$description" ]; do \
+    	read -p "Enter the description of your plugin: " description; \
+    done; \
+	while [ -z "$$organization" ]; do \
+		read -p "Enter the name of your organization: " organization; \
+	done; \
+	converted_name=$$(echo $$plugin_name | sed -E 's/([a-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]'); \
+	converted_organization=$$(echo $$organization | sed -E 's/([a-z0-9])([A-Z])/\1-\2/g' | tr '[:upper:]' '[:lower:]'); \
+    converted_name="$${converted_organization}/sylius-$${converted_name#-}-plugin"; \
     jq --arg name "$$converted_name" '.name = $$name' composer.json > composer.tmp.json && mv composer.tmp.json composer.json; \
     jq --arg desc "$$description" '.description = $$desc' composer.json > composer.tmp.json && mv composer.tmp.json composer.json; \
-    echo "The description of your plugin is $$description"; \
-    namespace="Acseo\\Sylius$${plugin_name}Plugin"; \
+    namespace="$${organization}\\Sylius$${plugin_name}Plugin"; \
     namespaceTest="Tests\\$$namespace"; \
-    nameFile="AcseoSylius$${plugin_name}Plugin"; \
-    namePlugin="Acseo\\\Sylius$${plugin_name}Plugin"; \
+    nameFile="$${organization}Sylius$${plugin_name}Plugin"; \
+    namePlugin="$${organization}\\\Sylius$${plugin_name}Plugin"; \
     jq --arg namespace "$$namespace" --arg namespaceTest "$$namespaceTest" \
        'del(.autoload["psr-4"]) | .autoload["psr-4"] = { ($$namespace + "\\"): "src/", ($$namespaceTest + "\\"): "tests/" }' composer.json > composer.tmp.json && mv composer.tmp.json composer.json; \
     mv src/AcmeSyliusExamplePlugin.php src/$${nameFile}.php; \
