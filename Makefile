@@ -43,7 +43,9 @@ rewrite:
     sed -i '' "s#class AcmeSyliusExamplePlugin#class $${nameFile}#g" src/$${nameFile}.php; \
     sed -i '' "s#namespace Acme\\\SyliusExamplePlugin#namespace $${namePlugin}#g" src/$${nameFile}.php;  \
     sed -i '' "s#Acme\\\\SyliusExamplePlugin\\\\AcmeSyliusExamplePlugin::class#$${namePlugin}\\\\$${nameFile}::class#g" tests/Application/config/bundles.php;  \
-    sed -i '' "s#Acme\\\\SyliusExamplePlugin#$${namePlugin}#g" phpspec.yml.dist;
+    sed -i '' "s#Acme\\\\SyliusExamplePlugin#$${namePlugin}#g" phpspec.yml.dist; \
+    sed -i '' "s#namespace Tests\\\Acme\\\SyliusExamplePlugin\\\Application#namespace Tests\\\\$${namePlugin}\\\\Application#g" tests/Application/Kernel.php;  \
+    sed -i '' "s#use Tests\\\Acme\\\SyliusExamplePlugin\\\Application\\\Kernel#use Tests\\\\$${namePlugin}\\\\Application\\\Kernel#g" tests/Application/bin/console;  \
 
 install: composer backend frontend
 
