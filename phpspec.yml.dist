@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: Acseo\SyliusPopPlugin
+        psr4_prefix: Acseo\SyliusPopPlugin
