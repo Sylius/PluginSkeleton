@@ -41,7 +41,8 @@ rewrite:
     mv src/AcmeSyliusExamplePlugin.php src/$${nameFile}.php; \
     sed -i '' "s#class AcmeSyliusExamplePlugin#class $${nameFile}#g" src/$${nameFile}.php; \
     sed -i '' "s#namespace Acme\\\SyliusExamplePlugin#namespace $${namePlugin}#g" src/$${nameFile}.php;  \
-    sed -i '' "s#Acme\\\\SyliusExamplePlugin\\\\AcmeSyliusExamplePlugin::class#$${namePlugin}\\\\$${nameFile}::class#g" tests/Application/config/bundles.php
+    sed -i '' "s#Acme\\\\SyliusExamplePlugin\\\\AcmeSyliusExamplePlugin::class#$${namePlugin}\\\\$${nameFile}::class#g" tests/Application/config/bundles.php;  \
+    sed -i '' "s#Acme\\\\SyliusExamplePlugin#$${namePlugin}#g" phpspec.yml.dist;
 
 init: rewrite install backend frontend
 
