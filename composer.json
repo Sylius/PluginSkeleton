@@ -75,6 +75,9 @@
         ]
     },
     "scripts": {
+        "pre-update-cmd": [
+            "php bin/check_memory_limit.php"
+        ],
         "post-install-cmd": [
             "php bin/create_node_symlink.php"
         ],

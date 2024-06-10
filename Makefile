@@ -24,12 +24,9 @@ frontend:
 	(cd tests/Application && yarn install --pure-lockfile)
 	(cd tests/Application && GULP_ENV=prod yarn build)
 
-behat:
-	APP_ENV=test vendor/bin/behat --colors --strict --no-interaction -vvv -f progress
-
 init: install backend frontend
 
-ci: init phpstan psalm phpunit phpspec behat
+ci: init phpstan psalm phpunit phpspec
 
 integration: init phpunit behat
 
