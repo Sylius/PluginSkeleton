@@ -10,7 +10,7 @@
     "require": {
         "php": "^8.1",
         "sylius/sylius": "~1.13.0",
-        "symfony/webpack-encore-bundle": "^1.15"
+        "symfony/webpack-encore-bundle": "^2.1"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
