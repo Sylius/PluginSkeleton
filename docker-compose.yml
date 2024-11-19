@@ -1,6 +1,6 @@
 services:
     app:
-        image: sylius/standard:1.11-traditional-alpine
+        build: .
         environment:
             APP_ENV: "dev"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%?charset=utf8mb4"

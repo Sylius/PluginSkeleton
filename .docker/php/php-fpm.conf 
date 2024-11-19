@@ -1,0 +1,29 @@
+[global]
+daemonize = no
+
+error_log = /var/log/php-fpm/error.log
+log_level = error
+
+[www]
+user  = www-data
+group = www-data
+
+clear_env = no
+
+catch_workers_output = yes
+
+slowlog = /var/log/php-fpm/slow.log
+
+listen = 127.0.0.1:9000
+listen.owner = www-data
+listen.group = www-data
+listen.mode  = 0660
+
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+pm.status_path = /status
+
+security.limit_extensions = .php
