@@ -10,24 +10,10 @@ use Webmozart\Assert\Assert;
 
 final class WelcomeContext implements Context
 {
-    /**
-     * @var WelcomePageInterface
-     */
-    private $staticWelcomePage;
-
-    /**
-     * @var WelcomePageInterface
-     */
-    private $dynamicWelcomePage;
-
-    /**
-     * @param WelcomePageInterface $staticWelcomePage
-     * @param WelcomePageInterface $dynamicWelcomePage
-     */
-    public function __construct(WelcomePageInterface $staticWelcomePage, WelcomePageInterface $dynamicWelcomePage)
-    {
-        $this->staticWelcomePage = $staticWelcomePage;
-        $this->dynamicWelcomePage = $dynamicWelcomePage;
+    public function __construct(
+        private readonly WelcomePageInterface $staticWelcomePage,
+        private readonly WelcomePageInterface $dynamicWelcomePage,
+    ) {
     }
 
     /**

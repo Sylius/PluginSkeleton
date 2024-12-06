@@ -3,3 +3,5 @@ webpack_encore:
     builds:
         shop: '%kernel.project_dir%/public/build/shop'
         admin: '%kernel.project_dir%/public/build/admin'
+        app.admin: '%kernel.project_dir%/public/build/app/admin'
+        app.shop: '%kernel.project_dir%/public/build/app/shop'

@@ -8,6 +8,6 @@
     "watch": "encore dev --watch"
   },
   "devDependencies": {
-    "@sylius-ui/frontend": "^1.0"
+    "@sylius-ui/frontend": "^1.0.3"
   }
 }

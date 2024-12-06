@@ -8,25 +8,19 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class StaticWelcomePage extends SymfonyPage implements WelcomePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function getGreeting(): string
     {
         return $this->getElement('greeting')->getText();
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     public function getRouteName(): string
     {
         return 'acme_sylius_example_static_welcome';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @inheritdoc */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

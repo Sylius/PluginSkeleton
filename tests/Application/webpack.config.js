@@ -21,7 +21,6 @@ const shopConfig = Encore.getWebpackConfig();
 shopConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
 shopConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
 shopConfig.resolve.alias['sylius/bundle'] = syliusBundles;
-shopConfig.resolve.alias['chart.js/dist/Chart.min'] = path.resolve(__dirname, 'node_modules/chart.js/dist/chart.min.js');
 shopConfig.name = 'shop';
 
 Encore.reset();
@@ -42,8 +41,49 @@ const adminConfig = Encore.getWebpackConfig();
 adminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
 adminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
 adminConfig.resolve.alias['sylius/bundle'] = syliusBundles;
-adminConfig.resolve.alias['chart.js/dist/Chart.min'] = path.resolve(__dirname, 'node_modules/chart.js/dist/chart.min.js');
 adminConfig.externals = Object.assign({}, adminConfig.externals, { window: 'window', document: 'document' });
 adminConfig.name = 'admin';
 
-module.exports = [shopConfig, adminConfig];
+Encore.reset();
+
+// App shop config
+Encore
+  .setOutputPath('public/build/app/shop')
+  .setPublicPath('/build/app/shop')
+  .addEntry('app-shop-entry', './assets/shop/entrypoint.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .enableSassLoader();
+
+const appShopConfig = Encore.getWebpackConfig();
+
+appShopConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
+appShopConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
+appShopConfig.resolve.alias['sylius/bundle'] = syliusBundles;
+appShopConfig.externals = Object.assign({}, appShopConfig.externals, { window: 'window', document: 'document' });
+appShopConfig.name = 'app.shop';
+
+Encore.reset();
+
+// App admin config
+Encore
+  .setOutputPath('public/build/app/admin')
+  .setPublicPath('/build/app/admin')
+  .addEntry('app-admin-entry', './assets/admin/entrypoint.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .enableSassLoader();
+
+const appAdminConfig = Encore.getWebpackConfig();
+
+appAdminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
+appAdminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
+appAdminConfig.resolve.alias['sylius/bundle'] = syliusBundles;
+appAdminConfig.externals = Object.assign({}, appAdminConfig.externals, { window: 'window', document: 'document' });
+appAdminConfig.name = 'app.admin';
+
+module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig];

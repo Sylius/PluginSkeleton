@@ -1,6 +1,10 @@
 <p align="center">
     <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://media.sylius.com/sylius-logo-800-dark.png">
+          <source media="(prefers-color-scheme: light)" srcset="https://media.sylius.com/sylius-logo-800.png">
+          <img alt="Sylius Logo." src="https://media.sylius.com/sylius-logo-800.png">
+        </picture>
     </a>
 </p>
 
@@ -59,7 +63,7 @@ To be able to set up a plugin's database, remember to configure you database cre
   - Behat (non-JS scenarios)
 
     ```bash
-    vendor/bin/behat --strict --tags="~@javascript"
+    vendor/bin/behat --strict --tags="~@javascript&&~@mink:chromedriver"
     ```
 
   - Behat (JS scenarios)
@@ -82,16 +86,10 @@ To be able to set up a plugin's database, remember to configure you database cre
     4. Run Behat:
     
       ```bash
-      vendor/bin/behat --strict --tags="@javascript"
+      vendor/bin/behat --strict --tags="~@javascript&&~@mink:chromedriver"
       ```
     
   - Static Analysis
-  
-    - Psalm
-    
-      ```bash
-      vendor/bin/psalm
-      ```
       
     - PHPStan
     

@@ -24,7 +24,7 @@ jobs:
                 php: ["8.1", "8.2", "8.3"]
                 symfony: ["^5.4", "^6.4"]
                 node: ["20.x"]
-                mysql: ["8.0"]
+                mysql: ["8.4"]
 
         env:
             APP_ENV: test
@@ -32,7 +32,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -
                 name: Setup PHP
@@ -177,7 +177,7 @@ jobs:
 
             -
                 name: Upload Behat logs
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 if: failure()
                 with:
                     name: Behat logs
