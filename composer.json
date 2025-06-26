@@ -4,7 +4,8 @@
     "description": "Acme example plugin for Sylius.",
     "keywords": [
         "sylius",
-        "sylius-plugin"
+        "sylius-plugin",
+        "test-appication"
     ],
     "license": "MIT",
     "require": {
