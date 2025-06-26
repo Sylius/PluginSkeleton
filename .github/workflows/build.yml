@@ -74,7 +74,7 @@ jobs:
 
             -
                 name: Run webserver
-                run: (cd tests/Application && symfony server:start --port=8080 --dir=public --daemon)
+                run: (symfony server:start --port=8080 --dir=public --daemon)
 
             -
                 name: Get Composer cache directory
@@ -129,27 +129,27 @@ jobs:
 
             -
                 name: Install JS dependencies
-                run: (cd tests/Application && yarn install)
+                run: (cd vendor/sylius/test-application && yarn install)
 
             -
                 name: Prepare test application database
                 run: |
-                    (cd tests/Application && bin/console doctrine:database:create -vvv)
-                    (cd tests/Application && bin/console doctrine:schema:create -vvv)
+                    (vendor/bin/console doctrine:database:create -vvv)
+                    (vendor/bin/console doctrine:schema:create -vvv)
 
             -
                 name: Prepare test application assets
                 run: |
-                    (cd tests/Application && bin/console assets:install public -vvv)
-                    (cd tests/Application && yarn build:prod)
+                    (cd vendor/bin/console assets:install public -vvv)
+                    (cd vendor/sylius/test-application && yarn build:prod)
 
             -
                 name: Prepare test application cache
-                run: (cd tests/Application && bin/console cache:warmup -vvv)
+                run: (cd vendor/bin/console cache:warmup -vvv)
 
             -
                 name: Load fixtures in test application
-                run: (cd tests/Application && bin/console sylius:fixtures:load -n)
+                run: (cd vendor/bin/console sylius:fixtures:load -n)
 
             -
                 name: Validate composer.json
@@ -157,7 +157,7 @@ jobs:
 
             -
                 name: Validate database schema
-                run: (cd tests/Application && bin/console doctrine:schema:validate)
+                run: (cd vendor/bin/console doctrine:schema:validate)
 
             -
                 name: Run PHPStan

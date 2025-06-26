@@ -1,0 +1,6 @@
+imports:
+    - { resource: "@AcmeSyliusExamplePlugin/config/config.yaml" }
+
+twig:
+    paths:
+        '%kernel.project_dir%/../../../tests/TestApplication/templates': ~
