@@ -42,7 +42,8 @@
         "symfony/http-client": "^6.4 || ^7.1",
         "symfony/intl": "^6.4 || ^7.1",
         "symfony/web-profiler-bundle": "^6.4 || ^7.1",
-        "symfony/webpack-encore-bundle": "^2.2"
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symfony/runtime": "^6.4"
     },
     "config": {
         "sort-packages": true,
@@ -50,7 +51,8 @@
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "php-http/discovery": false,
             "phpstan/extension-installer": true,
-            "symfony/flex": true
+            "symfony/flex": true,
+            "symfony/runtime": true
         }
     },
     "extra": {

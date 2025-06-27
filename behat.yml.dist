@@ -3,15 +3,8 @@ imports:
     - tests/Behat/Resources/suites.yml
 
 default:
-    formatters:
-        pretty:
-            verbose: true
-            paths: false
-            snippets: false
-
     extensions:
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
-        Robertfausk\Behat\PantherExtension: ~
 
         FriendsOfBehat\MinkDebugExtension:
             directory: etc/build
@@ -22,43 +15,25 @@ default:
             files_path: "%paths.base%/vendor/sylius/sylius/src/Sylius/Behat/Resources/fixtures/"
             base_url: "https://127.0.0.1:8080/"
             default_session: symfony
-            javascript_session: panther
+            javascript_session: chrome
             sessions:
                 symfony:
                     symfony: ~
-                chromedriver:
+                chrome:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
-                chrome_headless_second_session:
-                    chrome:
-                        api_url: http://127.0.0.1:9222
-                        validate_certificate: false
-                panther:
-                    panther:
-                        options:
-                            webServerDir: '%paths.base%/tests/Application/public'
-                        manager_options:
-                            connection_timeout_in_ms: 5000
-                            request_timeout_in_ms: 120000
-                            chromedriver_arguments:
-                                - --log-path=etc/build/chromedriver.log
-                                - --verbose
-                            capabilities:
-                                acceptSslCerts: true
-                                acceptInsecureCerts: true
-                                unexpectedAlertBehaviour: accept
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension:
-            bootstrap: tests/Application/config/bootstrap.php
+            bootstrap: vendor/sylius/test-application/config/bootstrap.php
             kernel:
-                class: Tests\Acme\SyliusExamplePlugin\Application\Kernel
+                class: Sylius\TestApplication\Kernel
 
         FriendsOfBehat\VariadicExtension: ~
+
+        SyliusLabs\SuiteTagsExtension: ~
 
         FriendsOfBehat\SuiteSettingsExtension:
             paths:
                 - "features"
-
-        SyliusLabs\SuiteTagsExtension: ~

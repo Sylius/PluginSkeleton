@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
-         colors="true"
-         bootstrap="tests/Application/config/bootstrap.php">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    colors="true"
+    bootstrap="vendor/sylius/test-application/config/bootstrap.php"
+>
+    <php>
+        <server name="KERNEL_CLASS" value="Sylius\TestApplication\Kernel" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true"/>
+        <server name="EXPECTED_RESPONSE_DIR" value="../Responses/Expected"/>
+
+        <env name="APP_SECRET" value="''" />
+        <env name="APP_ENV" value="test"/>
+    </php>
+
     <testsuites>
-        <testsuite name="AcmeSyliusExamplePlugin Test Suite">
+        <testsuite name="all">
             <directory>tests</directory>
         </testsuite>
+
+        <testsuite name="unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="functional">
+            <directory>tests/Functional</directory>
+        </testsuite>
+
+        <testsuite name="integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+
+        <testsuite name="non-unit">
+            <directory>tests/Functional</directory>
+            <directory>tests/Integration</directory>
+        </testsuite>
     </testsuites>
-
-    <php>
-        <ini name="error_reporting" value="-1" />
-
-        <server name="KERNEL_CLASS_PATH" value="/tests/Application/AppKernel.php" />
-        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
-
-        <env name="APP_ENV" value="test"/>
-        <env name="SHELL_VERBOSITY" value="-1" />
-    </php>
 </phpunit>

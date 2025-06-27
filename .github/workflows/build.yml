@@ -72,9 +72,9 @@ jobs:
                 name: Run Chrome Headless
                 run: google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
 
-            -
+            -   
                 name: Run webserver
-                run: (symfony server:start --port=8080 --dir=public --daemon)
+                run: symfony server:start --port=8080 --daemon
 
             -
                 name: Get Composer cache directory
@@ -140,16 +140,16 @@ jobs:
             -
                 name: Prepare test application assets
                 run: |
-                    (cd vendor/bin/console assets:install public -vvv)
+                    (vendor/bin/console assets:install public -vvv)
                     (cd vendor/sylius/test-application && yarn build:prod)
 
             -
                 name: Prepare test application cache
-                run: (cd vendor/bin/console cache:warmup -vvv)
+                run: (vendor/bin/console cache:warmup -vvv)
 
             -
                 name: Load fixtures in test application
-                run: (cd vendor/bin/console sylius:fixtures:load -n)
+                run: (vendor/bin/console sylius:fixtures:load -n)
 
             -
                 name: Validate composer.json
@@ -157,7 +157,7 @@ jobs:
 
             -
                 name: Validate database schema
-                run: (cd vendor/bin/console doctrine:schema:validate)
+                run: (vendor/bin/console doctrine:schema:validate)
 
             -
                 name: Run PHPStan
