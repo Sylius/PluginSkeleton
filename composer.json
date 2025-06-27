@@ -34,7 +34,7 @@
         "sylius-labs/coding-standard": "^4.4",
         "sylius-labs/suite-tags-extension": "~0.2",
         "sylius/sylius-rector": "^2.0",
-        "sylius/test-application": "~2.0.0",
+        "sylius/test-application": "^2.0",
         "symfony/browser-kit": "^6.4 || ^7.1",
         "symfony/debug-bundle": "^6.4 || ^7.1",
         "symfony/dotenv": "^6.4 || ^7.1",
@@ -63,7 +63,6 @@
             "require": "^6.4"
         },
         "public-dir": "vendor/sylius/test-application/public"
-
     },
     "autoload": {
         "psr-4": {
@@ -71,6 +70,6 @@
             "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "prefer-stable": true
 }
