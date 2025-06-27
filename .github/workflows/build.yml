@@ -29,11 +29,11 @@ jobs:
         env:
             APP_ENV: test
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
-        
+
         steps:
             -
                 uses: actions/checkout@v4
-            
+
             -
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -42,7 +42,7 @@ jobs:
                     extensions: intl
                     tools: flex, symfony
                     coverage: none
-            
+
             -
                 name: Setup Node
                 uses: actions/setup-node@v4
@@ -63,16 +63,16 @@ jobs:
             -
                 name: Output PHP version for Symfony CLI
                 run: php -v | head -n 1 | awk '{ print $2 }' > .php-version
-            
+
             -
                 name: Install certificates
                 run: symfony server:ca:install
-            
+
             -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-            
+
             -
                 name: Cache Composer
                 uses: actions/cache@v4
@@ -81,7 +81,7 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-composer-
-            
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -94,20 +94,20 @@ jobs:
                 name: Restrict Sylius version
                 if: matrix.sylius != ''
                 run: composer require "sylius/sylius:${{ matrix.sylius }}" --no-update --no-scripts --no-interaction
-            
+
             -
                 name: Install PHP dependencies
                 run: composer install --no-interaction
-            
+
             -
                 name: Run unit tests
                 run: vendor/bin/phpunit --colors=always --testsuite=unit
-            
+
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
                 run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-            
+
             -
                 name: Cache Yarn
                 uses: actions/cache@v4
@@ -116,11 +116,11 @@ jobs:
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-node-${{ matrix.node }}-yarn-
-            
+
             -
                 name: Install JS dependencies
                 run: (cd vendor/sylius/test-application && yarn install)
-            
+
             -
                 name: Prepare test application database
                 run: |
@@ -132,38 +132,39 @@ jobs:
                 run: |
                     vendor/bin/console assets:install -vvv
                     (cd vendor/sylius/test-application && yarn build)
-            
+
             -
                 name: Prepare test application cache
                 run: vendor/bin/console cache:warmup -vvv
-            
+
             -
                 name: Load fixtures in test application
                 run: vendor/bin/console sylius:fixtures:load -n
+
             -
                 name: Validate composer.json
                 run: composer validate --ansi --strict
-            
+
             -
                 name: Validate container
                 run: vendor/bin/console lint:container
-            
+
             -
                 name: Run Non-unit PHPUnit tests
                 run: vendor/bin/phpunit --colors=always --testsuite=non-unit
-            
+
             -
                 name: Run Chrome Headless
                 run: google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
-            
+
             -
                 name: Run webserver
                 run: symfony server:start --port=8080 --daemon
-            
+
             -
                 name: Run Behat
                 run: vendor/bin/behat --colors --strict -vvv --no-interaction -f progress || vendor/bin/behat --colors --strict -vvv --no-interaction -f progress --rerun
-                
+
             -
                 name: Upload Behat logs
                 uses: actions/upload-artifact@v4
