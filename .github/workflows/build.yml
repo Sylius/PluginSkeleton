@@ -175,11 +175,13 @@ jobs:
                 name: Run Behat
                 run: vendor/bin/behat --colors --strict -vvv --no-interaction -f progress  || vendor/bin/behat --colors --strict -vvv --no-interaction -f progress --rerun
 
-            -
+            -   
                 name: Upload Behat logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: Behat logs
+                    name: "Behat logs - ${{ matrix.sylius }}-${{ github.run_id }}-${{ github.run_number }}"
                     path: etc/build/
                     if-no-files-found: ignore
+                    compression-level: 6
+                    overwrite: true
