@@ -44,7 +44,7 @@
         "symfony/intl": "^6.4 || ^7.1",
         "symfony/web-profiler-bundle": "^6.4 || ^7.1",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfony/runtime": "^6.4"
+        "symfony/runtime": "^7.3"
     },
     "config": {
         "sort-packages": true,
