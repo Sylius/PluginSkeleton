@@ -2,7 +2,6 @@
 /.editorconfig export-ignore
 /.gitattributes export-ignore
 /.github export-ignore
-/.gitignore export-ignore
 /behat.yml.dist export-ignore
 /docker-compose.yml export-ignore
 /docs export-ignore
@@ -15,4 +14,3 @@
 /phpunit.xml.dist export-ignore
 /psalm.xml export-ignore
 /symfony.lock export-ignore
-/tests export-ignore
