@@ -29,15 +29,11 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.3"]
+                php: ["8.3", "8.4"]
                 symfony: ["^6.4", "^7.4"]
-                sylius: ["~2.0.0", "~2.1.0", "~2.2.0"]
+                sylius: ["~2.1.0", "~2.2.0"]
                 database: ["mysql:8.4"]
                 node: ["22.x"]
-
-                exclude:
-                    - sylius: "~2.0.0"
-                      symfony: "^7.4"
 
                 include:
                     - php: "8.3"
@@ -90,6 +86,10 @@ jobs:
                     php_version: "${{ matrix.php }}"
                     sylius_version: "${{ matrix.sylius }}"
                     symfony_version: "${{ matrix.symfony }}"
+
+            -
+                name: Run PHPStan
+                run: vendor/bin/phpstan analyse
 
             -
                 name: Run unit tests
