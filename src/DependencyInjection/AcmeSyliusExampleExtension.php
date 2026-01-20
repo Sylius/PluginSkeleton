@@ -30,7 +30,7 @@ final class AcmeSyliusExampleExtension extends AbstractResourceExtension impleme
 
     protected function getMigrationsNamespace(): string
     {
-        return 'DoctrineMigrations';
+        return 'Acme\SyliusExamplePlugin';
     }
 
     protected function getMigrationsDirectory(): string
