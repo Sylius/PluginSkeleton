@@ -9,9 +9,6 @@ use Webmozart\Assert\Assert;
 
 class DynamicWelcomePage extends SymfonyPage implements WelcomePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getGreeting(): string
     {
         $greeting = $this->getSession()->getPage()->waitFor(3, function (): string {
@@ -29,17 +26,11 @@ class DynamicWelcomePage extends SymfonyPage implements WelcomePageInterface
         return $greeting;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteName(): string
     {
         return 'acme_sylius_example_dynamic_welcome';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
