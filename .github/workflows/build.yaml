@@ -88,6 +88,10 @@ jobs:
                     symfony_version: "${{ matrix.symfony }}"
 
             -
+                name: Run ECS
+                run: vendor/bin/ecs check
+
+            -
                 name: Run PHPStan
                 run: vendor/bin/phpstan analyse
 
