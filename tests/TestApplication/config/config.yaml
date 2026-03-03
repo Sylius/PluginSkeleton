@@ -1,5 +1,5 @@
 imports:
-    - { resource: "@AcmeSyliusExamplePlugin/config/config.yaml" }
+    - { resource: "@AcmeSyliusExamplePlugin/config/config.php" }
     - { resource: "services_test.php" }
 
 twig:
