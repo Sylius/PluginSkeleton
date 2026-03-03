@@ -17,6 +17,6 @@ services:
         image: ghcr.io/sylius/sylius-nginx:latest
         depends_on:
             -   php
-    mailhog:
+    mailpit:
         # do not use in production!
-        image: mailhog/mailhog:latest
+        image: axllent/mailpit:latest
