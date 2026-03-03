@@ -103,7 +103,7 @@ To be able to set up a plugin's database, remember to configure your database cr
     - PHPStan
     
       ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
+      vendor/bin/phpstan analyse
       ```
 
   - Coding Standard
