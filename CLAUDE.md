@@ -86,7 +86,7 @@ This is a **Sylius Plugin Skeleton** - a template for creating Sylius e-commerce
 ### Core Structure
 - **Main Plugin Class**: `src/AcmeSyliusExamplePlugin.php` - Entry point using `SyliusPluginTrait`
 - **DI Extension**: `src/DependencyInjection/AcmeSyliusExampleExtension.php` - Handles service loading and Doctrine migrations
-- **Services**: `config/services.xml` - Service definitions with XML configuration
+- **Services**: `config/services.php` - Service definitions with PHP configuration
 - **Routes**: `config/routes/` - Separate admin and shop route definitions
 - **Templates**: `templates/` - Twig templates for admin and shop with Twig hooks support
 

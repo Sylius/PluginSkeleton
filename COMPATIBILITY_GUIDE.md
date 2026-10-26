@@ -1,63 +1,77 @@
 # Compatibility With Sylius Guide for AI
 
-This guide explains how to configure the Plugin to work with different versions of Sylius (1.14, 2.0, and 2.1).
+This guide explains how to configure the Plugin to work with different versions of Sylius (2.2 and 2.3) and Symfony (6.4, 7.4 and 8.0).
 
-## Supported Sylius Versions
+## Supported Versions
 
-- Sylius 1.14.x
-- Sylius 2.0.x  
-- Sylius 2.1.x
+| Sylius | Symfony              | PHP     |
+|--------|----------------------|---------|
+| 2.2.x  | ^6.4 \|\| ^7.4       | >= 8.2  |
+| 2.3.x  | ^6.4 \|\| ^7.4 \|\| ^8.0 | >= 8.2 (>= 8.4.1 for Symfony 8) |
 
 ## Key Compatibility Changes
 
 ### 1. Composer Configuration
 
-To support multiple Sylius versions, update your `composer.json`:
+To support multiple Sylius and Symfony versions, update your `composer.json`:
 
 ```json
 {
     "require": {
-        "php": "^8.1",
-        "sylius/sylius": "^1.14 || ^2.0 || ^2.1"
+        "php": "^8.2",
+        "sylius/sylius": "^2.2"
     },
     "require-dev": {
-        "sylius/sylius-rector": "^1.14 || ^2.0",
-        "sylius/test-application": "^1.14.0@alpha || ^2.0.0@alpha || ^2.1.0@alpha",
-        "symfony/webpack-encore-bundle": "^1.15 || ^2.2"
+        "behat/behat": "^3.22 || 4.0.0-alpha1",
+        "phpstan/phpstan": "^2.1",
+        "sylius/sylius-rector": "^3.0",
+        "sylius/test-application": "^2.0.0@alpha",
+        "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0"
     },
     "prefer-stable": true
 }
 ```
 
 **Important notes:**
-- PHP 8.1 is the minimum requirement for cross-version compatibility
 - Use `prefer-stable: true` to prefer stable packages when available
 - Use version constraints with `||` operator to support multiple versions
 
-#### For Sylius 2.0 and 2.1:
+### 2. No XML Configuration
 
-In Sylius 2.0+, these properties are provided by the parent class, so you can use them directly without initialization.
+Symfony 8 removed XML support for service configuration. Use PHP files only:
+- Plugin services: `config/services.php`
+- Behat services: `tests/Behat/Resources/services.php`
 
-### 2. Testing Across Versions
+Sylius 2.3 ships its own Behat services and suites as PHP, while Sylius 2.2 still uses XML/YAML. Import them conditionally:
 
-To test your plugin with different Sylius versions:
+```php
+// tests/TestApplication/config/services_test.php
+$syliusBehatServices = '../../../vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services';
+$container->import(is_file(__DIR__ . '/' . $syliusBehatServices . '.php') ? $syliusBehatServices . '.php' : $syliusBehatServices . '.xml');
+```
 
-1. **Update composer.json for specific version:**
+The same pattern is used for Sylius suites in `behat.dist.php`.
+
+### 3. Behat
+
+- Configuration lives in `behat.dist.php` (`Behat\Config\Config`), suites in `tests/Behat/Resources/suites.php`
+- Step definitions must use attributes (`#[Given]`, `#[When]`, `#[Then]` from `Behat\Step`), not annotations
+
+### 4. Testing Across Versions
+
+1. **Install a specific combination:**
    ```bash
-   # For Sylius 1.14
-   composer require "sylius/sylius:~1.14.0"
-   
-   # For Sylius 2.0
-   composer require "sylius/sylius:~2.0.0"
-   
-   # For Sylius 2.1
-   composer require "sylius/sylius:~2.1.0"
+   # Sylius 2.2 with Symfony 7.4
+   SYMFONY_REQUIRE="^7.4" composer update --with "sylius/sylius:~2.2.0" -W
+
+   # Sylius 2.3 with Symfony 8 (PHP >= 8.4.1)
+   SYMFONY_REQUIRE="^8.0" composer update --with "sylius/sylius:~2.3.0" -W
    ```
 
 2. **Run tests:**
    ```bash
+   vendor/bin/phpstan analyse
    vendor/bin/phpunit
-   vendor/bin/phpspec run
    vendor/bin/behat
    ```
 
@@ -69,7 +83,7 @@ To test your plugin with different Sylius versions:
 
 3. **Document Version-Specific Features**: If certain features only work with specific Sylius versions, document this clearly.
 
-4. **Use CI/CD**: Set up GitHub Actions or other CI tools to test against all supported versions automatically.
+4. **Use CI/CD**: The `.github/workflows/build.yaml` matrix already covers all supported Sylius, Symfony and PHP combinations.
 
 ## Troubleshooting
 
@@ -77,10 +91,6 @@ To test your plugin with different Sylius versions:
 
 1. **Service not found errors**: Check that service IDs haven't changed between versions.
 
-2. **Namespace conflicts**: Use fully qualified class names when there's ambiguity.
+2. **XML loader errors on Symfony 8**: Convert any remaining `.xml` service files to `.php`.
 
 3. **Dependency conflicts**: Use `composer why-not` to debug version constraint issues.
-
-## Conclusion
-
-By following this guide, your plugin should work seamlessly across Sylius 1.14, 2.0, and 2.1. The key is understanding the differences between versions and implementing conditional logic where necessary while maintaining a clean, maintainable codebase.

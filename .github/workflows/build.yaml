@@ -29,47 +29,56 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.3"]
-                symfony: ["^6.4", "^7.4"]
-                sylius: ["~2.0.0", "~2.1.0", "~2.2.0"]
+                php: ["8.3", "8.4"]
+                symfony: ["^6.4", "^7.4", "^8.0"]
+                sylius: ["~2.2.0", "~2.3.0"]
                 database: ["mysql:8.4"]
-                node: ["22.x"]
+                node: ["24.x"]
 
                 exclude:
-                    - sylius: "~2.0.0"
-                      symfony: "^7.4"
+                    # Symfony 8 requires PHP >= 8.4.1
+                    - php: "8.3"
+                      symfony: "^8.0"
+                    # Sylius 2.2 supports Symfony ^6.4 || ^7.4 only
+                    - sylius: "~2.2.0"
+                      symfony: "^8.0"
 
                 include:
                     - php: "8.3"
                       symfony: "^7.4"
                       sylius: "~2.2.0"
-                      database: "mysql:8.0"
-                      node: "22.x"
-                    - php: "8.3"
-                      symfony: "^7.4"
-                      sylius: "~2.2.0"
-                      database: "mariadb:10.11"
-                      node: "22.x"
-                    - php: "8.3"
-                      symfony: "^7.4"
-                      sylius: "~2.2.0"
-                      database: "mariadb:11.4"
-                      node: "22.x"
-                    - php: "8.3"
-                      symfony: "^7.4"
-                      sylius: "~2.2.0"
-                      database: "postgres:15"
-                      node: "22.x"
-                    - php: "8.3"
-                      symfony: "^7.4"
-                      sylius: "~2.2.0"
-                      database: "postgres:16"
-                      node: "22.x"
-                    - php: "8.3"
-                      symfony: "^7.4"
-                      sylius: "~2.2.0"
                       database: "postgres:17"
-                      node: "22.x"
+                      node: "24.x"
+                    - php: "8.4"
+                      symfony: "^8.0"
+                      sylius: "~2.3.0"
+                      database: "mysql:8.0"
+                      node: "24.x"
+                    - php: "8.4"
+                      symfony: "^8.0"
+                      sylius: "~2.3.0"
+                      database: "mariadb:10.11"
+                      node: "24.x"
+                    - php: "8.4"
+                      symfony: "^8.0"
+                      sylius: "~2.3.0"
+                      database: "mariadb:11.4"
+                      node: "24.x"
+                    - php: "8.4"
+                      symfony: "^8.0"
+                      sylius: "~2.3.0"
+                      database: "postgres:15"
+                      node: "24.x"
+                    - php: "8.4"
+                      symfony: "^8.0"
+                      sylius: "~2.3.0"
+                      database: "postgres:16"
+                      node: "24.x"
+                    - php: "8.4"
+                      symfony: "^8.0"
+                      sylius: "~2.3.0"
+                      database: "postgres:17"
+                      node: "24.x"
 
         env:
             APP_ENV: test
@@ -90,6 +99,7 @@ jobs:
                     php_version: "${{ matrix.php }}"
                     sylius_version: "${{ matrix.sylius }}"
                     symfony_version: "${{ matrix.symfony }}"
+                    composer_prefer_stable: "yes"
 
             -
                 name: Run unit tests
@@ -116,7 +126,7 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Behat logs - Sylius ${{ matrix.sylius }} - ${{ matrix.database }} - ${{ github.run_id }}"
+                    name: "Behat logs - Sylius ${{ matrix.sylius }} - PHP ${{ matrix.php }} - Symfony ${{ matrix.symfony }} - ${{ matrix.database }} - ${{ github.run_id }}"
                     path: etc/build/
                     if-no-files-found: ignore
                     compression-level: 6

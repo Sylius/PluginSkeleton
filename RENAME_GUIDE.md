@@ -31,7 +31,7 @@ To ensure a smooth renaming process, follow this order:
 1. **Rename PHP files** - Start with the physical file renames
 2. **Update PHP namespaces** - Update all namespace declarations and class names
 3. **Update composer.json** - Change package name and autoload configurations
-4. **Update configuration files** - Modify all YAML/XML configurations
+4. **Update configuration files** - Modify all YAML/PHP configurations
 5. **Update environment files** - Change database names and bundle references
 6. **Update documentation** - Modify CLAUDE.md and other docs
 7. **Validate and cleanup** - Run composer commands and verify changes
@@ -159,8 +159,8 @@ Update `CLAUDE.md` to reflect the new plugin name and namespace.
 Don't forget to also check and update:
 - `tests/TestApplication/.env.local` (if exists)
 - Any other `.env.*` files in the test application
-- `tests/Behat/Resources/services.xml` - may contain old service references
-- All XML files in `tests/` directory - they might have namespace references
+- `tests/Behat/Resources/services.php` - may contain old service references
+- `tests/Behat/Resources/suites.php` and `behat.dist.php` - may contain old service IDs or namespaces
 - `phpspec.yml.dist` (if exists) - contains namespace configuration
 - Any custom configuration files you may have added
 - Database names should use snake_case format
@@ -271,7 +271,7 @@ rm -rf var/cache/*  # Clear Symfony cache
 4. **Database names** - Should use snake_case format with full plugin name
 
 5. **Test files cleanup** - Don't forget to update or remove:
-   - `tests/Behat/Resources/services.xml` - may contain old service references
+   - `tests/Behat/Resources/services.php` - may contain old service references
    - Any remaining example/demo test files
 
 6. **Not removing example code first** - Always run CLEANUP_GUIDE.md before renaming:

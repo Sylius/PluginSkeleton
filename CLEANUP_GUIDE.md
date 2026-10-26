@@ -37,9 +37,9 @@ Common locations for example files in Sylius plugins:
 ## Step 3: Identify Configuration to Clean
 
 ### Service Definitions
-**File:** `config/services.xml`
+**File:** `config/services.php`
 - Remove service definitions for example controllers
-- Look for: `<service id="...Controller\ExampleController" />`
+- Look for: `$services->set(...\Controller\ExampleController::class)`
 
 ### Routing
 **Files:** `config/routes/shop.yaml`, `config/routes/admin.yaml`
@@ -64,7 +64,7 @@ Common locations for example files in Sylius plugins:
 - Clean up any example-specific configuration
 
 ### Behat Suites
-**File:** `tests/Behat/Resources/suites.yml`
+**File:** `tests/Behat/Resources/suites.php`
 - Remove suite definitions for example features
 - Look for suites with example/demo names
 
@@ -80,12 +80,13 @@ Use this checklist to ensure complete cleanup:
    - [ ] Behat test files (`tests/Behat/`)
 
 2. **Clean configurations:**
-   - [ ] Remove service definitions from `config/services.xml`
+   - [ ] Remove service definitions from `config/services.php`
    - [ ] Remove routes from `config/routes/*.yaml`
    - [ ] Remove twig hooks from `config/twig_hooks/*.yaml` or remove entire directory if empty
    - [ ] Remove broken imports from `config/config.yaml`
    - [ ] Remove JavaScript imports from `assets/*/entrypoint.js`
-   - [ ] Remove test suites from `tests/Behat/Resources/suites.yml`
+   - [ ] Remove test suites from `tests/Behat/Resources/suites.php`
+   - [ ] Remove Behat services from `tests/Behat/Resources/services.php`
 
 3. **Additional cleanup:**
    - [ ] Remove empty directories (e.g., `config/twig_hooks/` if only contains placeholder files)
@@ -141,7 +142,7 @@ make phpstan
 Never delete these essential files:
 - `src/[PluginName]Plugin.php` (main plugin class)
 - `src/DependencyInjection/` (directory structure)
-- `config/services.xml` (keep file, just clean content)
+- `config/services.php` (keep file, just clean content)
 - `config/*_routing.yaml` (keep files, just clean content)
 - `composer.json`, `package.json`
 - Essential directories: `src/`, `config/`, `templates/`, `tests/`

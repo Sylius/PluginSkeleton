@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Acme\SyliusExamplePlugin\Behat\Page\Shop;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Webmozart\Assert\Assert;
 
 class DynamicWelcomePage extends SymfonyPage implements WelcomePageInterface
 {
@@ -23,8 +22,6 @@ class DynamicWelcomePage extends SymfonyPage implements WelcomePageInterface
 
             return $greeting;
         });
-
-        Assert::string($greeting, 'Greeting should be a string, but it is not.');
 
         return $greeting;
     }
