@@ -10,7 +10,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "sylius/sylius": "^2.0"
+        "sylius/sylius": "^2.2",
+        "sylius/telemetry": "^1.0"
     },
     "require-dev": {
         "behat/behat": "^3.16",
