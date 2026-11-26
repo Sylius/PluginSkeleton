@@ -5,7 +5,7 @@
     "keywords": [
         "sylius",
         "sylius-plugin",
-        "test-appication"
+        "test-application"
     ],
     "license": "MIT",
     "require": {
