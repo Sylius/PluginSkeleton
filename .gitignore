@@ -9,6 +9,7 @@
 
 /.phpunit.result.cache
 /behat.yml
+/behat.php
 /phpunit.xml
 /compose.override.yml
 .phpunit.result.cache

@@ -31,43 +31,39 @@ jobs:
             matrix:
                 php: ["8.3"]
                 symfony: ["^6.4", "^7.4"]
-                sylius: ["~2.0.0", "~2.1.0", "~2.2.0"]
+                sylius: ["~2.2.0", "~2.3.0"]
                 database: ["mysql:8.4"]
                 node: ["22.x"]
-
-                exclude:
-                    - sylius: "~2.0.0"
-                      symfony: "^7.4"
 
                 include:
                     - php: "8.3"
                       symfony: "^7.4"
-                      sylius: "~2.2.0"
+                      sylius: "~2.3.0"
                       database: "mysql:8.0"
                       node: "22.x"
                     - php: "8.3"
                       symfony: "^7.4"
-                      sylius: "~2.2.0"
+                      sylius: "~2.3.0"
                       database: "mariadb:10.11"
                       node: "22.x"
                     - php: "8.3"
                       symfony: "^7.4"
-                      sylius: "~2.2.0"
+                      sylius: "~2.3.0"
                       database: "mariadb:11.4"
                       node: "22.x"
                     - php: "8.3"
                       symfony: "^7.4"
-                      sylius: "~2.2.0"
+                      sylius: "~2.3.0"
                       database: "postgres:15"
                       node: "22.x"
                     - php: "8.3"
                       symfony: "^7.4"
-                      sylius: "~2.2.0"
+                      sylius: "~2.3.0"
                       database: "postgres:16"
                       node: "22.x"
                     - php: "8.3"
                       symfony: "^7.4"
-                      sylius: "~2.2.0"
+                      sylius: "~2.3.0"
                       database: "postgres:17"
                       node: "22.x"
 
